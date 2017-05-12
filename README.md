@@ -32,51 +32,86 @@ for numbers. Our models also do
 not experiences short-comings from other
 models such as repeating summaries.
 
-###Requirements:
+### Example Summaries:
+
+y*: president trump 's approval rating hit a new low 37 percent since he took office in January , according to the latest gallup poll .
+
+y': trump 's approval rating hits new low
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+y*: North Korea marked the final day of US Secretary of State Rex Tillerson's Asia visit Sunday by claiming to have tested a new type of rocket engine, underlining the country's defiance of recent calls for calm on the Korean Peninsula .
+
+y': urgent north korea marks final day of us visit
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+y*: southeast asian countries expressed confidence tuesday that their tsunami-hit tourism industries will return to normal , but pleaded with western governments not to warn citizens against travel to disaster-hit areas . in the aftermath of the dec . 26 indian ocean tsunami , many european governments , such as denmark , norway and sweden , issued advisories to their citizens not to travel to devastated areas in indonesia , india , sri lanka , thailand and the maldives .
+
+y': southeast asian countries express confidence on tourism
+
+### Requirements:
 tensorflow 0.12.1
+
 matplotlib
+
 numpy
 
-###Dataset:
+### Dataset:
 Gigaword Data set or similarily structured data set
 
-###Preprocessing Data:
-python utils/preprocessing.py -in "input path" -out "processed_path" -a
-python utils/split_dataset.py -in "processed_path" -out "data_processed" -dev DEVSIZE -test TESTSIZE
+### Preprocessing Data:
+
+Preprocess dataset to output first three sentences and headline of each article in corresponding files
+`python utils/preprocessing.py -in "input path" -out "processed_path" -a`
+
+Split into train/dev/test data
+`python utils/split_dataset.py -in "processed_path" -out "data_processed" -dev DEVSIZE -test TESTSIZE`
 
 ### Configuration
+
 Word embeddings: 128
+
 Hidden states: 256
+
 Batch size: 64
+
 Dropout: 0.75
+
 Num epochs: 10
+
 Learning rate: 0.01
+
 Encoder length: 200
+
 Decoder length: 20
 
-##Training:
-python seq2seq.py -c "checkpoint_path"
-Other flags:
--l 0 (when running for the first time)
--a (attention)
--bi (bidirectional encoder)
--p (pointer)
--v (vocab size)
+## Training:
+`python seq2seq.py -c "checkpoint_path"`
 
-##Predicting:
-python seq2seq.py predict -c "checkpoint_path"
 Other flags:
--l 0 (when running for the first time)
--a (attention)
--bi (bidirectional encoder)
--p (pointer)
--v (vocab size)
+* -l 0 (when running for the first time)
+* -a (attention)
+* -bi (bidirectional encoder)
+* -p (pointer)
+* -v (vocab size)
 
-##Interactive:
-python seq2seq.py interactive -c "checkpoint_path"
+## Predicting:
+`python seq2seq.py predict -c "checkpoint_path"`
+
 Other flags:
--a (attention)
--bi (bidirectional encoder)
--p (pointer)
--b (beam search)
--v (vocab size)
+* -l 0 (when running for the first time)
+* -a (attention)
+* -bi (bidirectional encoder)
+* -p (pointer)
+* -v (vocab size)
+
+## Interactive:
+`python seq2seq.py interactive -c "checkpoint_path"`
+
+Other flags:
+* -a (attention)
+* -bi (bidirectional encoder)
+* -p (pointer)
+* -b (beam search)
+* -v (vocab size)
